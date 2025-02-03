@@ -1,109 +1,95 @@
-<html lang="en">
-<head>
-    
-    <title>Employee Details Form</title>
-    <style>
-        body {
-            padding: 20px;
-            background-color: #f4f4f9;
-        }
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .form-group label {
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+<!-- employee-form.component.html -->
+<div class="container">
+    <h2 class="text-center my-4">Employee Details Form</h2>
+    <div class="form-container">
+        <form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+            <!-- Employee ID -->
+            <div class="mb-3">
+                <label for="emp_id" class="form-label">Employee ID</label>
+                <input type="text" id="emp_id" name="emp_id" class="form-control" [(ngModel)]="employee.emp_id" required>
+            </div>
 
-    <div class="container">
-        <h2 class="text-center my-4">Employee Details Form</h2>
-        <div class="form-container">
-            <form action="/submit_employee_details" method="POST">
-                <div class="mb-3">
-                    <label for="emp_id" class="form-label">Employee ID</label>
-                    <input type="text" id="emp_id" name="emp_id" class="form-control" required>
-                </div>
+            <!-- First Name -->
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" id="first_name" name="first_name" class="form-control" [(ngModel)]="employee.first_name" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="first_name" class="form-label">First Name</label>
-                    <input type="text" id="first_name" name="first_name" class="form-control" required>
-                </div>
+            <!-- Last Name -->
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" id="last_name" name="last_name" class="form-control" [(ngModel)]="employee.last_name" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="last_name" class="form-label">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" class="form-control" required>
-                </div>
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control" [(ngModel)]="employee.email" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" [(ngModel)]="employee.phone" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" class="form-control" required>
-                </div>
+            <!-- Date of Birth -->
+            <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="form-control" [(ngModel)]="employee.dob" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="dob" class="form-label">Date of Birth</label>
-                    <input type="date" id="dob" name="dob" class="form-control" required>
+            <!-- Gender -->
+            <div class="mb-3">
+                <label class="form-label">Gender</label><br>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="male" name="gender" value="male" class="form-check-input" [(ngModel)]="employee.gender" required>
+                    <label for="male" class="form-check-label">Male</label>
                 </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="female" name="gender" value="female" class="form-check-input" [(ngModel)]="employee.gender" required>
+                    <label for="female" class="form-check-label">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" id="other" name="gender" value="other" class="form-check-input" [(ngModel)]="employee.gender">
+                    <label for="other" class="form-check-label">Other</label>
+                </div>
+            </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Gender</label><br>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="male" name="gender" value="male" class="form-check-input" required>
-                        <label for="male" class="form-check-label">Male</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="female" name="gender" value="female" class="form-check-input" required>
-                        <label for="female" class="form-check-label">Female</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" id="other" name="gender" value="other" class="form-check-input">
-                        <label for="other" class="form-check-label">Other</label>
-                    </div>
-                </div>
+            <!-- Address -->
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea id="address" name="address" rows="4" class="form-control" [(ngModel)]="employee.address" required></textarea>
+            </div>
 
-                <div class="mb-3">
-                    <label for="address" class="form-label">Address</label>
-                    <textarea id="address" name="address" rows="4" class="form-control" required></textarea>
-                </div>
+            <!-- Department -->
+            <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <select id="department" name="department" class="form-select" [(ngModel)]="employee.department" required>
+                    <option value="HR">Human Resources</option>
+                    <option value="IT">Information Technology</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Operations">Operations</option>
+                </select>
+            </div>
 
-                <div class="mb-3">
-                    <label for="department" class="form-label">Department</label>
-                    <select id="department" name="department" class="form-select" required>
-                        <option value="HR">Human Resources</option>
-                        <option value="IT">Information Technology</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Operations">Operations</option>
-                    </select>
-                </div>
+            <!-- Joining Date -->
+            <div class="mb-3">
+                <label for="joining_date" class="form-label">Joining Date</label>
+                <input type="date" id="joining_date" name="joining_date" class="form-control" [(ngModel)]="employee.joining_date" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="joining_date" class="form-label">Joining Date</label>
-                    <input type="date" id="joining_date" name="joining_date" class="form-control" required>
-                </div>
+            <!-- Salary -->
+            <div class="mb-3">
+                <label for="salary" class="form-label">Salary</label>
+                <input type="number" id="salary" name="salary" class="form-control" [(ngModel)]="employee.salary" required>
+            </div>
 
-                <div class="mb-3">
-                    <label for="salary" class="form-label">Salary</label>
-                    <input type="number" id="salary" name="salary" class="form-control" required>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
-                </div>
-            </form>
-        </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100" [disabled]="!employeeForm.valid">Submit</button>
+            </div>
+        </form>
     </div>
-
-    
-</body>
-</html>
+</div>
